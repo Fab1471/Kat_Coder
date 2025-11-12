@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For My Lovelove — A small site</title>
+
+  <!-- Tailwind CDN (Play) - quick and easy for local files / GitHub Pages -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* small extras to emulate the original feel */
+    html,body { height: 100%; }
+    body { background: linear-gradient(180deg,#fff5f9 0%, #f0f9ff 50%, #eef2ff 100%); }
+    .nav-btn { transition: transform .12s ease, box-shadow .12s ease; }
+    .nav-btn:active { transform: translateY(1px); }
+    /* subtle card shadow like original */
+    .card-shadow { box-shadow: 0 10px 30px rgba(2,6,23,0.06); }
+    pre { white-space: pre-wrap; }
+  </style>
+</head>
+<body class="min-h-screen font-sans text-gray-800">
+
+  <div class="max-w-4xl mx-auto p-6">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-3xl font-extrabold">For My <span class="text-pink-500">Lovelove</span></h1>
+        <p class="text-sm text-gray-600">A little playful site I made just for you, babe 💗</p>
+      </div>
+
+      <nav class="space-x-2 hidden sm:flex">
+        <button data-page="home" class="nav-btn px-3 py-1 rounded-full bg-white shadow text-sm">Home</button>
+        <button data-page="story" class="nav-btn px-3 py-1 rounded-full bg-white shadow text-sm">Our Story</button>
+        <button data-page="letter" class="nav-btn px-3 py-1 rounded-full bg-white shadow text-sm">Love Letter</button>
+        <button data-page="reasons" class="nav-btn px-3 py-1 rounded-full bg-white shadow text-sm">Reasons I Love You</button>
+        <button data-page="gallery" class="nav-btn px-3 py-1 rounded-full bg-white shadow text-sm">Gallery</button>
+        <button data-page="message" class="nav-btn px-3 py-1 rounded-full bg-white shadow text-sm">Message</button>
+      </nav>
+
+      <!-- Mobile menu -->
+      <div class="sm:hidden">
+        <select id="mobile-nav" class="border rounded px-2 py-1 text-sm">
+          <option value="home">Home</option>
+          <option value="story">Our Story</option>
+          <option value="letter">Love Letter</option>
+          <option value="reasons">Reasons I Love You</option>
+          <option value="gallery">Gallery</option>
+          <option value="message">Message</option>
+        </select>
+      </div>
+    </header>
+
+    <!-- Main container -->
+    <main id="main" class="space-y-6">
+
+      <!-- Home -->
+      <section id="page-home" class="page card-shadow bg-white rounded-2xl p-8" data-visible>
+        <h2 class="text-2xl font-semibold text-center">Hi, Lovelove! 💕</h2>
+        <p class="mt-4 text-center text-gray-700">This is my little corner just for you — full of soft memories, silly captions, and a whole lot of love.</p>
+
+        <div class="mt-6 flex justify-center gap-4">
+          <button id="open-letter-cta" class="px-5 py-2 rounded-full bg-pink-500 text-white shadow">Open your letter</button>
+          <button id="open-gallery-cta" class="px-5 py-2 rounded-full bg-white shadow">See our photos</button>
+        </div>
+
+        <div class="mt-8 flex justify-center">
+          <div class="inline-flex items-center space-x-3 bg-pink-50 p-3 rounded-full shadow-sm">
+            <span class="text-xl">🎈</span>
+            <div class="text-left">
+              <div class="text-sm text-gray-600">Today’s little reminder:</div>
+              <div class="font-medium">You are loved. You are enough. — Always.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Our Story -->
+      <section id="page-story" class="page hidden bg-white rounded-2xl p-8 card-shadow">
+        <h2 class="text-2xl font-semibold">Our Story</h2>
+        <p class="mt-4 leading-relaxed text-gray-700">Nine months ago we started something small — messages that turned into late-night calls, plans that turned into promises, and little moments that quietly built us. We may be far sometimes, but distance never stopped us from showing up. This space holds those small, soft pieces of us.</p>
+        <ul class="mt-6 space-y-2 list-disc list-inside text-gray-700">
+          <li>First time we talked: that nervous laugh I still remember</li>
+          <li>First time I knew: when you made time even when you were busy</li>
+          <li>What I love most: the way you stay focused and keep going</li>
+        </ul>
+      </section>
+
+      <!-- Love Letter -->
+      <section id="page-letter" class="page hidden bg-white rounded-2xl p-8 card-shadow">
+        <h2 class="text-2xl font-semibold">Love Letter</h2>
+        <pre id="love-letter-text" class="mt-4 whitespace-pre-line leading-relaxed text-gray-800"></pre>
+
+        <div class="mt-6 flex gap-3">
+          <button id="copy-letter" class="px-4 py-2 rounded-full bg-pink-500 text-white">Copy Letter</button>
+          <a id="download-letter" href="#" class="px-4 py-2 rounded-full bg-white shadow">Download</a>
+          <button id="back-from-letter" class="ml-auto px-4 py-2 rounded-full bg-gray-100">Back</button>
+        </div>
+      </section>
+
+      <!-- Reasons -->
+      <section id="page-reasons" class="page hidden bg-white rounded-2xl p-8 card-shadow">
+        <h2 class="text-2xl font-semibold">Reasons I Love You</h2>
+        <p class="text-sm text-gray-600 mt-2">(A playful, honest list — add more if you want!)</p>
+
+        <ol id="reasons-list" class="mt-4 list-decimal list-inside space-y-2"></ol>
+
+        <div class="mt-6">
+          <textarea id="new-reason" placeholder="Add another reason..." class="w-full p-3 rounded-md border" rows="2"></textarea>
+          <div class="mt-3 flex justify-end">
+            <button id="add-reason-btn" class="px-4 py-2 rounded-full bg-pink-500 text-white">Add</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery -->
+      <section id="page-gallery" class="page hidden bg-white rounded-2xl p-8 card-shadow">
+        <h2 class="text-2xl font-semibold">Gallery / Memories</h2>
+        <p class="text-sm text-gray-600 mt-2">(Replace placeholders with your photos later)</p>
+
+        <div id="gallery-grid" class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+
+        <div class="mt-6">
+          <label class="block text-sm text-gray-600">Upload a photo (not functional in preview; replace src in code)</label>
+          <input type="file" class="mt-2" disabled />
+        </div>
+      </section>
+
+      <!-- Message -->
+      <section id="page-message" class="page hidden bg-white rounded-2xl p-8 card-shadow text-center">
+        <h2 class="text-2xl font-semibold">Message for You</h2>
+        <p class="mt-4">No matter how far we are, I hope this little website reminds you that you’re loved — always, endlessly, and for real.</p>
+        <p class="mt-4 font-medium">— Always, your <span class="text-pink-500">Lovey</span></p>
+        <div class="mt-6">
+          <button id="surprise-btn" class="px-4 py-2 rounded-full bg-pink-500 text-white">Send a surprise message</button>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="mt-6 text-center text-sm text-gray-500">
+      Made with ♥ for Lovelove • Built by Kath
+    </footer>
+
+  </div>
+
+  <!-- Scripts: keep state, interactions, copy/download, dynamic rendering -->
+  <script>
+    (function () {
+      // Data from the original JSX
+      const loveLetter = `Happy 30th Birthday, my love.
+
+I know you’ve been feeling a bit down about turning 30, thinking you should have been more successful by now. But I just want you to pause for a moment and see yourself the way I do. You’re hardworking, focused, disciplined, and loving — and those things mean more than any timeline or milestone. You’re not behind, love. You’re exactly where you need to be, learning, growing, and building something real for yourself.
+
+I know it’s not easy to start over or to chase your goals when it feels like time is moving too fast, but please remember that beginnings don’t have an age limit. You’re doing your best, and that’s something to be proud of. I see how you give your all every single day, even when no one notices, and I hope you know how much that inspires me.
+
+Turning 30 doesn’t mean you’re late — it just means you’ve lived, learned, and are now wiser to take on what’s next. You’ve come so far, and I believe that everything you’ve been working for will fall into place at the right time.
+
+And through it all, I’ll be right here, cheering for you, loving you, and reminding you that you are already enough — with or without the success you think you need. You’re already a man I’m proud of.
+
+So today, celebrate yourself. Not for what you’ve achieved, but for who you’ve become. You deserve peace, love, and all the good things still waiting for you.`;
+
+      const reasons = [
+        "You work hard and never give up",
+        "You make me feel safe even from afar",
+        "You’re focused and purposeful",
+        "Your quiet love says more than words",
+        "You make ordinary days feel special"
+      ];
+
+      const gallery = [
+        { src: "https://placehold.co/600x400?text=Our+Photo+1", caption: "When you smiled that day" },
+        { src: "https://placehold.co/600x400?text=Our+Photo+2", caption: "Late night calls" },
+        { src: "https://placehold.co/600x400?text=Our+Photo+3", caption: "Little everyday moments" }
+      ];
+
+      // Page switching
+      const pages = ["home","story","letter","reasons","gallery","message"];
+      function showPage(page) {
+        pages.forEach(p => {
+          const el = document.getElementById("page-" + p);
+          if (!el) return;
+          if (p === page) {
+            el.classList.remove("hidden");
+            el.setAttribute("data-visible","true");
+            window.location.hash = "#" + page;
+          } else {
+            el.classList.add("hidden");
+            el.removeAttribute("data-visible");
+          }
+        });
+        // highlight nav buttons
+        document.querySelectorAll('nav button[data-page]').forEach(btn => {
+          btn.classList.remove('bg-pink-500','text-white');
+          btn.classList.add('bg-white');
+          if (btn.getAttribute('data-page') === page) {
+            btn.classList.add('bg-pink-500','text-white');
+            btn.classList.remove('bg-white');
+          }
+        });
+        // mobile select
+        const mobile = document.getElementById('mobile-nav');
+        if (mobile) mobile.value = page;
+      }
+
+      // init
+      const initial = (location.hash && location.hash.replace('#','')) || 'home';
+      showPage(pages.includes(initial) ? initial : 'home');
+
+      // nav events
+      document.querySelectorAll('nav button[data-page]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          showPage(btn.getAttribute('data-page'));
+        });
+      });
+      document.getElementById('mobile-nav').addEventListener('change', function() {
+        showPage(this.value);
+      });
+
+      // small CTA buttons on home
+      document.getElementById('open-letter-cta').addEventListener('click', () => showPage('letter'));
+      document.getElementById('open-gallery-cta').addEventListener('click', () => showPage('gallery'));
+
+      // render love letter
+      const loveEl = document.getElementById('love-letter-text');
+      loveEl.textContent = loveLetter;
+
+      // copy to clipboard
+      document.getElementById('copy-letter').addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(loveLetter);
+          alert('Letter copied to clipboard 💖');
+        } catch (err) {
+          alert('Could not copy automatically. You can select and copy manually.');
+        }
+      });
+
+      // download link
+      const dl = document.getElementById('download-letter');
+      dl.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(loveLetter));
+      dl.setAttribute('download', 'love-letter.txt');
+
+      // reasons list render & add
+      const reasonsList = document.getElementById('reasons-list');
+      function renderReasons() {
+        reasonsList.innerHTML = '';
+        reasons.forEach((r, i) => {
+          const li = document.createElement('li');
+          li.className = 'bg-pink-50 p-3 rounded-lg';
+          li.textContent = r;
+          reasonsList.appendChild(li);
+        });
+      }
+      renderReasons();
+      document.getElementById('add-reason-btn').addEventListener('click', () => {
+        const val = document.getElementById('new-reason').value.trim();
+        if (!val) return alert('Write something sweet 💌');
+        reasons.push(val);
+        document.getElementById('new-reason').value = '';
+        renderReasons();
+      });
+
+      // gallery render
+      const galleryGrid = document.getElementById('gallery-grid');
+      function renderGallery() {
+        galleryGrid.innerHTML = '';
+        gallery.forEach(g => {
+          const figure = document.createElement('figure');
+          figure.className = 'rounded-lg overflow-hidden shadow bg-gray-100';
+          figure.innerHTML = `
+            <img src="${g.src}" alt="${escapeHtml(g.caption)}" class="w-full h-44 object-cover" />
+            <figcaption class="p-3 bg-white text-sm">${escapeHtml(g.caption)}</figcaption>
+          `;
+          galleryGrid.appendChild(figure);
+        });
+      }
+      renderGallery();
+
+      // surprise message
+      document.getElementById('surprise-btn').addEventListener('click', () => {
+        alert('Message sent! (This is a demo) 🎉');
+      });
+
+      // back button
+      document.getElementById('back-from-letter').addEventListener('click', () => showPage('home'));
+
+      // helper escape
+      function escapeHtml(text) {
+        return text.replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+      }
+
+    })();
+  </script>
+</body>
+</html>
